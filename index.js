@@ -16,7 +16,9 @@ io.on("connection", (socket) => {
         io.to(roomId).emit('user:joined', {username, id: socket.id})
         io.to(socket.id).emit('room:join', {username, roomId})
     })
-
+    socket.on('room:ack', ({to, id}) => {
+        io.to(to).emit("room:ack", {id: id})
+    })
     socket.on("user:call", ({to, offer}) => {
         io.to(to).emit("incoming:call", {from: socket.id, offer})
     })
