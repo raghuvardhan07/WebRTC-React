@@ -30,10 +30,7 @@ io.on("connection", (socket) => {
     //     io.to(to).emit("sent:stream", {from: socket.id})
     // })
 
-    socket.on("neg:offer", ({to, offer}) => {
-        io.to(to).emit("neg:offer", {from: socket.id, offer})
-    })
-    socket.on("neg:answer", ({to, answer}) => {
-        io.to(to).emit("neg:answer", {from: socket.id, answer})
+    socket.on("ice:candidate", ({candidate, to}) => {
+        io.to(to).emit("ice:candidate", {from: socket.id, candidate})
     })
 })
